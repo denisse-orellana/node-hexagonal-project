@@ -107,10 +107,10 @@
     // "skipLibCheck": true                              /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-    "node_modules"                                       /* Allows to ignore the node_modules directory. */
+    "node_modules"                                       /* Allow to ignore the node_modules directory. */
   ],                            
   "include": [
-    "src/**/*.ts",                                       /* Allows to specify the directory for the code ready to compile or transpile */
-    "test/**/*.ts"                                       /* Allows to specify the directory for the code ready to compile or transpile */
+    "src/**/*.ts",                                       /* Allow to specify the directory for the code ready to compile or transpile */
+    "test/**/*.ts"                                       /* Allow to specify the directory for the code ready to compile or transpile */
   ]
 }

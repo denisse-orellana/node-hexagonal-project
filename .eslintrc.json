@@ -1,13 +1,11 @@
 {
   "root": true,
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "quotes": ["error", "single"],
@@ -16,5 +14,5 @@
     "no-empty": "error",
     "@typescript-eslint/no-var-requires": "off",
     "no-undef": "off"
-  } 
+  }
 }

@@ -4,7 +4,7 @@
   "description": "Node JS final project with Typescript and APIs Rest for Escalab TECH",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node src/index.ts"
+    "dev": "nodemon src/index.ts"
   },
   "author": "Denisse  Orellana",
   "license": "ISC",

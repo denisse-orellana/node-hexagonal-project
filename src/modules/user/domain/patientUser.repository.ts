@@ -2,9 +2,10 @@ import PatientUser from './patientUser'
 
 // SOLID Principle: Inversion Dependency
 export interface PatientUserRepository {
-  list(): PatientUser[]
-  listOne(guid: string): PatientUser
-  insert(user: PatientUser): PatientUser
-  update(user: PatientUser): PatientUser
-  delete(guid: string): PatientUser
+  // Design Pattern: Facade
+  list(): Promise<PatientUser[]>
+  listOne(guid: string): Promise<PatientUser>
+  insert(user: PatientUser): Promise<PatientUser>
+  update(user: PatientUser): Promise<PatientUser>
+  delete(guid: string): Promise<PatientUser>
 }

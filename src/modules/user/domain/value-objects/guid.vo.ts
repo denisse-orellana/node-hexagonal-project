@@ -1,20 +1,24 @@
 import { validate as uuidValidate } from 'uuid'
 import { ValueObject } from './vo.class'
+import { PatientUserGuidInvalidException } from '../exceptions/patientUser.exception'
+import { err, ok, Result } from 'neverthrow'
 
 interface GuidProps {
   value: string
 }
+
+type GuidResult = Result<GuidVO, PatientUserGuidInvalidException>
 
 export class GuidVO extends ValueObject<GuidProps> {
   private constructor(props: GuidProps) {
     super(props)
   }
 
-  static create(guid: string) {
+  static create(guid: string): GuidResult {
     if (!uuidValidate(guid)) {
-      throw new Error('It\'s not a valid GUID')
+      return err(new PatientUserGuidInvalidException)
     }
-    return new GuidVO({ value: guid })
+    return ok(new GuidVO({ value: guid }))
   }
 
   get value(): string {

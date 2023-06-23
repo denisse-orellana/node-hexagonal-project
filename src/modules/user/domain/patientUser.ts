@@ -16,7 +16,7 @@ interface PatientUserOptional {
   guid: string
 }
 
-interface PatientUserUpdate {
+export interface PatientUserUpdate {
   name: string
   lastname: string
   password: string

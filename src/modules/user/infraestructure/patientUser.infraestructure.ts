@@ -1,8 +1,11 @@
-import PatientUser from '../domain/patientUser'
+import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
 import { PatientUserRepository } from '../domain/patientUser.repository'
 import { PatientUserEntity } from './patientUser.entity'
 import DatabaseBootstrap from 'src/bootstrap/database.bootstrap'
 import { EmailVO } from '../domain/value-objects/email.vo'
+import { PatientUserEmailInvalidException, PatientUserNotFoundException } from '../domain/exceptions/patientUser.exception'
+import { Result, err, ok } from 'neverthrow'
+
 export default class PatientUserInfraestructure implements PatientUserRepository {
   async insert(patientUser: PatientUser): Promise<PatientUser> {
     const patientUserInsert = new PatientUserEntity()
@@ -22,4 +25,112 @@ export default class PatientUserInfraestructure implements PatientUserRepository
     return patientUser
   }
 
+  async list(): Promise<PatientUser[]> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
+    const result = await repo.find({ where: { active: true } })
+  
+    return result.map((el: PatientUserEntity) => {
+      const emailResult = EmailVO.create(el.email)
+  
+      if (emailResult.isErr()) {
+        throw new PatientUserEmailInvalidException()
+      }
+  
+      return new PatientUser({
+        guid: el.guid,
+        name: el.name,
+        lastname: el.lastname,
+        cellphone: el.cellphone,
+        email: emailResult.value,
+        password: el.password,
+        refreshToken: el.refreshToken,
+        active: el.active,
+      })
+    })
+  }
+
+  async listOne(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException>> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
+    const result = await repo.findOne({ where: { guid } })
+    const emailResult = EmailVO.create(result.email)
+
+    if (emailResult.isErr()) {
+      return err(new PatientUserEmailInvalidException())
+    }
+
+    if (!result) {
+      return err(new PatientUserNotFoundException())
+    } else {
+      return ok(
+        new PatientUser({
+          guid: result.guid,
+          name: result.name,
+          lastname: result.lastname,
+          cellphone: result.cellphone,
+          email: emailResult.value,
+          password: result.password,
+          refreshToken: result.refreshToken,
+          active: result.active,
+        }),
+      )
+    }
+  }
+
+  async update(guid: string, patientUser: Partial<PatientUserUpdate>): Promise<Result<PatientUser, PatientUserNotFoundException>> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
+    const patientUserFound = await repo.findOne({ where: { guid }})
+  
+    if (patientUserFound) {
+      Object.assign(patientUserFound, patientUser)
+      const result = await repo.save(patientUserFound)
+      const emailResult = EmailVO.create(result.email)
+
+      if (emailResult.isErr()) {
+        return err(new PatientUserEmailInvalidException())
+      }
+
+      return ok(
+        new PatientUser({
+          guid: result.guid,
+          name: result.name,
+          lastname: result.lastname,
+          cellphone: result.cellphone,
+          email: emailResult.value,
+          password: result.password,
+          refreshToken: result.refreshToken,
+          active: result.active,
+        }),
+      )
+    }
+  }
+
+  async delete(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException>> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
+    const patientUserFound = await repo.findOne({ where: { guid } })
+
+    if (patientUserFound) {
+      patientUserFound.active = false
+      const result = await repo.save(patientUserFound)
+      const emailResult = EmailVO.create(result.email)
+
+      if (emailResult.isErr()) {
+        return err(new PatientUserEmailInvalidException())
+      }
+
+      return ok(
+        new PatientUser({
+          guid: result.guid,
+          name: result.name,
+          lastname: result.lastname,
+          cellphone: result.cellphone,
+          email: emailResult.value,
+          password: result.password,
+          refreshToken: result.refreshToken,
+          active: result.active,
+        }),
+      )
+    } else {
+      return err(new PatientUserNotFoundException())
+    }
+  }
 }

@@ -88,9 +88,9 @@ export class PatientUserGuidInvalidException extends DomainException {
   }
 }
 
-export class PatientUserNoFoundException extends DomainException {
+export class PatientUserNotFoundException extends DomainException {
   constructor() { 
-   super(PatientUserNoFoundException .getMessage())
+   super(PatientUserNotFoundException .getMessage())
    this.name = DomainExceptionCode.PATIENT_NOT_FOUND
   }
 

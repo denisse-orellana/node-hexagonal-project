@@ -9,4 +9,12 @@ export default class PatientUserApplication {
   insert(patientUser: PatientUser) {
     return this.patientUserRepository.insert(patientUser)
   }
+
+  list() {
+    return this.patientUserRepository.list()
+  }
+
+  listOne(guid: string) {
+    return this.patientUserRepository.listOne(guid)
+  }
 }

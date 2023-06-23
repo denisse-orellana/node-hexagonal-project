@@ -2,10 +2,47 @@ import { v4 as uuid4 } from 'uuid'
 import PatientUser, { PatientUserProperties } from './patientUser'
 import { PatientUserPasswordService } from './services/user-password.service'
 import { EmailVO } from './value-objects/email.vo'
+import { 
+  PatientUserNameRequiredException,
+  PatientUserLastnameRequiredException,
+  PatientUserCellphoneRequiredException, 
+  PatientUserPasswordRequiredException,
+  PatientUserPasswordLengthInvalidException,
+} from './exceptions/patientUser.exception'
+import { err, ok, Result } from 'neverthrow'
+
+export type PatientUserResult = Result<
+  PatientUser, 
+  | PatientUserNameRequiredException
+  | PatientUserLastnameRequiredException
+  | PatientUserCellphoneRequiredException
+  | PatientUserPasswordRequiredException
+  | PatientUserPasswordLengthInvalidException
+>
 
 // Design Pattern: Abstract Factory
 export default class PatientUserFactory {
-  async create(name: string, lastname: string, email: EmailVO, password: string, cellphone: string) {
+  async create(name: string, lastname: string, cellphone: string, email: EmailVO, password: string): Promise<PatientUserResult> {
+    if (!name || name.trim() === '') {
+      return err(new PatientUserNameRequiredException())
+    }
+
+    if (!lastname || lastname.trim() === '') {
+      return err(new PatientUserLastnameRequiredException())
+    }
+
+    if (!cellphone || cellphone.trim() === '') {
+      return err(new PatientUserCellphoneRequiredException())
+    }
+
+    if (!password || password.trim() === '') {
+      return err(new PatientUserPasswordRequiredException())
+    }
+
+    if (password.length < 7) {
+      return err(new PatientUserPasswordLengthInvalidException(password))
+    }
+    
     const passwordHash = await PatientUserPasswordService.hash(password)
 
     const patientUserProperties: PatientUserProperties = {
@@ -19,6 +56,6 @@ export default class PatientUserFactory {
     }
 
     const patientUser = new PatientUser(patientUserProperties)
-    return patientUser
+    return ok(patientUser)
   }
 }

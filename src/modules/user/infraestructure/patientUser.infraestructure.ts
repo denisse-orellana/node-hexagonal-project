@@ -28,7 +28,7 @@ export default class PatientUserInfraestructure implements PatientUserRepository
   async list(): Promise<PatientUser[]> {
     const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
     const result = await repo.find({ where: { active: true } })
-  
+    
     return result.map((el: PatientUserEntity) => {
       const emailResult = EmailVO.create(el.email)
   
@@ -51,16 +51,16 @@ export default class PatientUserInfraestructure implements PatientUserRepository
 
   async listOne(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException>> {
     const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
-    const result = await repo.findOne({ where: { guid } })
-    const emailResult = EmailVO.create(result.email)
+    const patientUserFound = await repo.findOne({ where: { guid } })
 
-    if (emailResult.isErr()) {
-      return err(new PatientUserEmailInvalidException())
-    }
+    if (patientUserFound) {
+      const result = patientUserFound
+      const emailResult = EmailVO.create(result.email)
+  
+      if (emailResult.isErr()) {
+        return err(new PatientUserEmailInvalidException())
+      }
 
-    if (!result) {
-      return err(new PatientUserNotFoundException())
-    } else {
       return ok(
         new PatientUser({
           guid: result.guid,
@@ -73,6 +73,8 @@ export default class PatientUserInfraestructure implements PatientUserRepository
           active: result.active,
         }),
       )
+    } else {
+      return err(new PatientUserNotFoundException())
     }
   }
 
@@ -101,6 +103,8 @@ export default class PatientUserInfraestructure implements PatientUserRepository
           active: result.active,
         }),
       )
+    } else {
+      return err(new PatientUserNotFoundException())
     }
   }
 

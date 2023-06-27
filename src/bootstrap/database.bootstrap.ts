@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm'
 import { Bootstrap } from './base.bootstrap'
+import { PatientUserEntity } from 'src/modules/user/infraestructure/patientUser.entity'
 
 let appDataSource: DataSource
 
@@ -14,7 +15,7 @@ export default class extends Bootstrap {
       database: 'node_mysqlserver',
       synchronize: true,
       logging: true,
-      entities: [],
+      entities: [PatientUserEntity],
       migrations: [],
       subscribers: [],
     })

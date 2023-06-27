@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import routerHealth from './helpers/health'
 import HandlerErrors from './helpers/errors'
+import routerPatientUser from './modules/user/interfaces/http/patientUser.routes'
 
 class App {
   readonly expressApp: Application
@@ -19,6 +20,10 @@ class App {
   mountMiddlewares() {
     this.expressApp.use(express.json())
     this.expressApp.use(express.urlencoded({ extended: true }))
+  }
+
+  mountRoutes(): void {
+    this.expressApp.use('/patient', routerPatientUser)
   }
 
   mountErrors(): void {

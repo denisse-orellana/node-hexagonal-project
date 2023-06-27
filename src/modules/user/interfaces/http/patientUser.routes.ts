@@ -2,7 +2,8 @@ import { Router } from 'express'
 import PatientUserApplication from '../../application/patientUser.application'
 import { PatientUserRepository } from '../../domain/patientUser.repository'
 import PatientUserInfraestructure from '../../infraestructure/patientUser.infraestructure'
-import patientUserController from './patientUser.controller'
+import PatientUserController from './patientUser.controller'
+import { MiddlewareListOne } from './midlewares/patientUser.middleware'
 
 const infraestructure: PatientUserRepository = new PatientUserInfraestructure()
 const application = new PatientUserApplication(infraestructure)
@@ -13,10 +14,16 @@ class PatientUserRouter {
 
   constructor() {
     this.expressRouter = Router()
+    this.mountRoutes()
   }
 
   mountRoutes() {
-    // cargar rutas 
+    // Design Patter: Chain of responsability
+    this.expressRouter.post('/insert', controller.insert)
+    this.expressRouter.get('/list', controller.list)
+    this.expressRouter.get('/listOne/:guid', ...MiddlewareListOne, controller.listOne)
+    this.expressRouter.post('/update/:guid', controller.update)
+    this.expressRouter.post('/delete/:guid', controller.delete)
   }
 }
 

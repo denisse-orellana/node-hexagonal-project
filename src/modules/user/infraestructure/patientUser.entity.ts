@@ -3,26 +3,26 @@ import { Column, Entity, PrimaryColumn } from 'typeorm'
 @Entity()
 export class PatientUserEntity {
   @PrimaryColumn()
-  guid: string
+  guid: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  name: string
+  name: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  lastname: string
+  lastname: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  cellphone: string
+  cellphone: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  email: string
+  email: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  password: string
+  password: string | undefined
 
   @Column({ type: 'varchar', length: 100 })
-  refreshToken: string
+  refreshToken: string | undefined
 
   @Column({ type: 'varchar', default: true })
-  active: boolean
+  active: boolean | undefined
 }

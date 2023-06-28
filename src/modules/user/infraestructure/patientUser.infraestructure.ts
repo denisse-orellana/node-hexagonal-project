@@ -1,15 +1,17 @@
 import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
 import { PatientUserRepository } from '../domain/patientUser.repository'
+import { EmailVO } from '../domain/value-objects/email.vo'
 import { PatientUserEntity } from './patientUser.entity'
 import DatabaseBootstrap from 'src/bootstrap/database.bootstrap'
-import { EmailVO } from '../domain/value-objects/email.vo'
-import { PatientUserEmailInvalidException, PatientUserNotFoundException } from '../domain/exceptions/patientUser.exception'
 import { Result, err, ok } from 'neverthrow'
+import { PatientUserEmailInvalidException, PatientUserNotFoundException } from '../domain/exceptions/patientUser.exception'
+
 
 export default class PatientUserInfraestructure implements PatientUserRepository {
   async insert(patientUser: PatientUser): Promise<PatientUser> {
     const patientUserInsert = new PatientUserEntity()
     const { guid, name, lastname, cellphone, email, password, refreshToken, active } = patientUser.properties()
+    
     Object.assign(patientUserInsert, {
       guid,
       name,
@@ -27,6 +29,8 @@ export default class PatientUserInfraestructure implements PatientUserRepository
 
   async list(): Promise<PatientUser[]> {
     const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
+    // added console log: how test it
+    console.log(PatientUserEntity)
     const result = await repo.find({ where: { active: true } })
     
     return result.map((el: PatientUserEntity) => {
@@ -49,7 +53,7 @@ export default class PatientUserInfraestructure implements PatientUserRepository
     })
   }
 
-  async listOne(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException>> {
+  async listOne(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException | PatientUserEmailInvalidException>> {
     const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
     const patientUserFound = await repo.findOne({ where: { guid } })
 
@@ -108,7 +112,7 @@ export default class PatientUserInfraestructure implements PatientUserRepository
     }
   }
 
-  async delete(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException>> {
+  async delete(guid: string): Promise<Result<PatientUser, PatientUserNotFoundException | PatientUserEmailInvalidException>> {
     const repo = DatabaseBootstrap.dataSource.getRepository(PatientUserEntity)
     const patientUserFound = await repo.findOne({ where: { guid } })
 

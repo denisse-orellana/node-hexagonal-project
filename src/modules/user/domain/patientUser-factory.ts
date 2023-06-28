@@ -1,6 +1,6 @@
 import { v4 as uuid4 } from 'uuid'
-import PatientUser, { PatientUserProperties } from './patientUser'
 import { PatientUserPasswordService } from './services/user-password.service'
+import PatientUser, { PatientUserProperties } from './patientUser'
 import { EmailVO } from './value-objects/email.vo'
 import { 
   PatientUserNameRequiredException,
@@ -9,7 +9,7 @@ import {
   PatientUserPasswordRequiredException,
   PatientUserPasswordLengthInvalidException,
 } from './exceptions/patientUser.exception'
-import { err, ok, Result } from 'neverthrow'
+import { Result, err, ok } from 'neverthrow'
 
 export type PatientUserResult = Result<
   PatientUser, 

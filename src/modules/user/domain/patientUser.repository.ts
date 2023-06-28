@@ -1,6 +1,6 @@
 import { Result } from 'neverthrow'
-import PatientUser, { PatientUserUpdate } from './patientUser'
 import { PatientUserNotFoundException } from './exceptions/patientUser.exception'
+import PatientUser, { PatientUserUpdate } from './patientUser'
 
 // SOLID Principle: Inversion Dependency
 export interface PatientUserRepository {

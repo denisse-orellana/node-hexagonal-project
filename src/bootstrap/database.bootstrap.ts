@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm'
 import { Bootstrap } from './base.bootstrap'
-import { PatientUserEntity } from 'src/modules/user/infraestructure/patientUser.entity'
+import { PatientUserEntity } from '../../src/modules/user/infraestructure/patientUser.entity'
 
 let appDataSource: DataSource
 

@@ -1897,10 +1897,10 @@ typeorm@0.3.17:
     uuid "^9.0.0"
     yargs "^17.6.2"
 
-typescript@5.1.0-dev.20230515:
-  version "5.1.0-dev.20230515"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.0-dev.20230515.tgz#cf1c5b9542d7bb6f5eeb7878f041705ee6f963be"
-  integrity sha512-yn0MGsy6U0QAVF+lXW6LPupQmuRsyA0xUJetqw2tDqa+49231BpkhTuY6oEwLsc98tiEzCfIw7hzbLsiwVGFaA==
+typescript@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
+  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
 
 undefsafe@^2.0.5:
   version "2.0.5"

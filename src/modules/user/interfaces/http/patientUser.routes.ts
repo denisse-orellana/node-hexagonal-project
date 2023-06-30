@@ -22,8 +22,8 @@ class PatientUserRouter {
     this.expressRouter.post('/insert', controller.insert)
     this.expressRouter.get('/list', controller.list)
     this.expressRouter.get('/listOne/:guid', ...MiddlewareListOne, controller.listOne)
-    this.expressRouter.post('/update/:guid', controller.update)
-    this.expressRouter.post('/delete/:guid', controller.delete)
+    this.expressRouter.put('/update/:guid', controller.update)
+    this.expressRouter.delete('/delete/:guid', controller.delete)
   }
 }
 

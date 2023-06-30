@@ -1,4 +1,4 @@
-import { PatientUserProperties } from 'src/modules/user/domain/user'
+import { PatientUserProperties } from 'src/modules/user/domain/patientUser'
 import { DTO } from './dto.generic'
 
 interface PatientUserDTO {

@@ -1,4 +1,5 @@
 // import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
+// // import { PatientUserRepository } from '../domain/patientUser.repository'
 // import { PatientUserRepository } from '../domain/patientUser.repository'
 
 // export default class PatientUserApplication {
@@ -49,8 +50,8 @@ export default class PatientUserApplication {
     return this.patientUserRepository.listOne(guid)
   }
 
-  update(guid: string, user: Partial<PatientUserUpdate>) {
-    return this.patientUserRepository.update(guid, user)
+  update(guid: string, patientUser: Partial<PatientUserUpdate>) {
+    return this.patientUserRepository.update(guid, patientUser)
   }
 
   delete(guid: string) {

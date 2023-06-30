@@ -1,5 +1,5 @@
 import ServerBootstrap from './bootstrap/server.bootstrap'
-import DatabaseBootstrap from './bootstrap/database.bootstrap';
+import DatabaseBootstrap from './bootstrap/database.bootstrap'
 import { Bootstrap } from './bootstrap/base.bootstrap'
 import Application from './app'
 

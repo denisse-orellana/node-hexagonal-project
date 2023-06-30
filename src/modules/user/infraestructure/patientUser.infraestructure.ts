@@ -2,7 +2,7 @@ import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
 import { PatientUserRepository } from '../domain/patientUser.repository'
 import { EmailVO } from '../domain/value-objects/email.vo'
 import { PatientUserEntity } from './patientUser.entity'
-import DatabaseBootstrap from 'src/bootstrap/database.bootstrap'
+import DatabaseBootstrap from '../../../bootstrap/database.bootstrap'
 import { Result, err, ok } from 'neverthrow'
 import { PatientUserEmailInvalidException, PatientUserNotFoundException } from '../domain/exceptions/patientUser.exception'
 

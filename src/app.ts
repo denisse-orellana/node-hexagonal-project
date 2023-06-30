@@ -10,6 +10,7 @@ class App {
     this.expressApp = express()
     this.mountHealthCheck()
     this.mountMiddlewares()
+    this.mountRoutes()
     this.mountErrors()
   }
 

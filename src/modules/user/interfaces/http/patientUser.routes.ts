@@ -21,7 +21,7 @@ class PatientUserRouter {
     // Design Patter: Chain of responsability
     this.expressRouter.post('/insert', controller.insert)
     this.expressRouter.get('/list', controller.list)
-    this.expressRouter.get('/listOne/:guid', ...MiddlewareListOne, controller.listOne)
+    this.expressRouter.get('/list-one/:guid', ...MiddlewareListOne, controller.listOne)
     this.expressRouter.put('/update/:guid', controller.update)
     this.expressRouter.delete('/delete/:guid', controller.delete)
   }

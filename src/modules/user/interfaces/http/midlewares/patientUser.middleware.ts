@@ -46,7 +46,13 @@ class PatientUserMiddleware {
 }
 
 export const MiddlewareListOne: ((req: Request, res: Response, next: NextFunction) => Promise<void>)[] = [
-  PatientUserMiddleware.ValidateListOne,
-  PatientUserMiddleware.ValidateUpdate,
+  PatientUserMiddleware.ValidateListOne
+]
+
+export const MiddlewareUpdate: ((req: Request, res: Response, next: NextFunction) => Promise<void>)[] = [
+  PatientUserMiddleware.ValidateUpdate
+]
+
+export const MiddlewareDelete: ((req: Request, res: Response, next: NextFunction) => Promise<void>)[] = [
   PatientUserMiddleware.ValidateDelete
 ]

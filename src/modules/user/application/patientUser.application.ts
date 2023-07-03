@@ -29,13 +29,14 @@
 // }
 
 
-import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
+import PatientUser from '../domain/patientUser'
+import { PatientUserUpdate } from '../domain/interfaces/patientUserUpdate.interface'
 import { PatientUserRepository } from '../domain/patientUser.repository'
 
 export default class PatientUserApplication {
 
   // Solid Principle: Inversion Dependency
-  // Design Pattern Injection Dependency: https://desarrolloweb.com/articulos/patron-diseno-contenedor-dependencias.html
+  // Design Pattern: Injection Dependency
   constructor(private readonly patientUserRepository: PatientUserRepository) {}
 
   insert(patientUser: PatientUser) {

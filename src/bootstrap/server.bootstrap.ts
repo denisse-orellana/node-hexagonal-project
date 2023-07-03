@@ -8,6 +8,8 @@ export default class extends Bootstrap {
     super()
   }
 
+  // SOLID Principle: Liskov Sustitution
+  // SOLID Principle: Single Resposibility
   initialize() {
     return new Promise<string | Error>((_resolve, reject) => {
       const server = http.createServer(this.app)

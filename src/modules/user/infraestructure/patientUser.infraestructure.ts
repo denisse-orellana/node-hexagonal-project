@@ -1,4 +1,5 @@
-import PatientUser, { PatientUserUpdate } from '../domain/patientUser'
+import PatientUser from '../domain/patientUser'
+import { PatientUserUpdate } from '../domain/interfaces/patientUserUpdate.interface'
 import { PatientUserRepository } from '../domain/patientUser.repository'
 import { EmailVO } from '../domain/value-objects/email.vo'
 import { PatientUserEntity } from './patientUser.entity'

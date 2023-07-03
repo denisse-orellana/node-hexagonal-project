@@ -1,15 +1,6 @@
-import { PatientUserProperties } from 'src/modules/user/domain/patientUser'
+import { PatientUserProperties } from 'src/modules/user/domain/types/patientUser.type'
 import { DTO } from './dto.generic'
-
-interface PatientUserDTO {
-  name: string
-  lastname: string
-  cellphone: string
-  email: string
-  guid: string
-}
-
-export type PatientUserListDTO = PatientUserDTO[]
+import { PatientUserListDTO } from './types/patientUserList.type'
 
 export class PatientUserListMapping extends DTO<PatientUserProperties[], PatientUserListDTO> {
   execute(data: PatientUserProperties[]): PatientUserListDTO {

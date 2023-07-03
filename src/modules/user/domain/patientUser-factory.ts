@@ -1,6 +1,7 @@
 import { v4 as uuid4 } from 'uuid'
 import { PatientUserPasswordService } from './services/user-password.service'
-import PatientUser, { PatientUserProperties } from './patientUser'
+import PatientUser from './patientUser'
+import { PatientUserProperties } from './types/patientUser.type'
 import { EmailVO } from './value-objects/email.vo'
 import { 
   PatientUserNameRequiredException,

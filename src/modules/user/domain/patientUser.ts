@@ -1,29 +1,7 @@
 import { IEntity } from '../../shared/entity.interface'
+import { PatientUserUpdate } from './interfaces/patientUserUpdate.interface'
+import { PatientUserProperties } from './types/patientUser.type'
 import { EmailVO } from './value-objects/email.vo'
-
-// SOLID Principle: Interface Segregation
-interface PatientUserRequired {
-  name: string
-  lastname: string
-  email: EmailVO
-  password: string
-  cellphone: string
-}
-
-interface PatientUserOptional {
-  refreshToken: string
-  active: boolean
-  guid: string
-}
-
-export interface PatientUserUpdate {
-  name: string
-  lastname: string
-  password: string
-  cellphone: string
-}
-
-export type PatientUserProperties = Required<PatientUserRequired> & Partial<PatientUserOptional>
 
 export default class PatientUser implements IEntity<PatientUserProperties, PatientUserUpdate> {
   private name!: string

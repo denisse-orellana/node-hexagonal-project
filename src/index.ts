@@ -10,8 +10,9 @@ const databaseBootstrap: Bootstrap = new DatabaseBootstrap()
   try {
     // const resultServer = await serverBootstrap.initialize()
     // console.log(resultServer)
+    // await databaseBootstrap.initialize()
+    await databaseBootstrap.initialize(), console.log('Database started successfully')
     await serverBootstrap.initialize()
-    await databaseBootstrap.initialize()
     console.log('Server started successfully')
   } catch (error) {
     console.log(error)

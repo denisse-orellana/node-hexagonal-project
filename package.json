@@ -8,7 +8,9 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix .",
-    "clean": "rimraf cache dist"
+    "clean": "rimraf cache dist",
+    "build": "yarn run clean && tsc && gulp minify",
+    "prod": "node dist/index.js"
   },
   "author": "Denisse  Orellana",
   "license": "ISC",

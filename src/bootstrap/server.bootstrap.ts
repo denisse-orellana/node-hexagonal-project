@@ -1,6 +1,7 @@
 import http from 'http'
 import { Application } from 'express'
 import { Bootstrap } from './base.bootstrap'
+import { AppService } from './services/app.service'
 
 export default class extends Bootstrap {
   constructor(private readonly app: Application) {
@@ -8,18 +9,19 @@ export default class extends Bootstrap {
   }
 
   initialize() {
-    return new Promise<string | Error>((resolve, reject) => {
+    return new Promise<string | Error>((_resolve, reject) => {
       const server = http.createServer(this.app)
 
       server
-        .listen(3000)
+        // .listen(3000)
+        .listen(`${AppService.PORT}`)
         .on('listening', () => {
-          resolve('Promise resolve successfully')
-          console.log('Listening server on port 3000')
+          // resolve('Promise resolve successfully')
+          console.log(`Listening server on port: ${AppService.PORT}`)
         })
         .on('error', error => {
           reject(error)
-          console.log('Error on port 3000')
+          console.log(`Error on port: ${AppService.PORT}`)
         })
     })
   }

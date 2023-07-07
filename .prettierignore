@@ -2,5 +2,6 @@ node_modules
 .gitignore
 cache
 dist
+tmp/data
 
 .env

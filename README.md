@@ -14,7 +14,7 @@ To set up this project make sure you have installed the following technologies:
 
 ## Getting started
 
-Clone the repository
+Clone the repository in the folder 
 
 ```console
   git clone git@github.com:denisseee/node-hexagonal-project.git node-hexagonal-project
@@ -27,3 +27,33 @@ Install dependencies
   yarn install
 ```
 
+```console
+  yarn run build
+  yarn run prod
+```
+
+```console
+touch .env
+``````
+
+```yml
+# .env
+
+# Ports
+LOCAL_PORT=3000
+DOCKER_PORT=3306
+
+# Docker compose services mysqldb
+MYSQL_DATABASE=mysql_database
+MYSQL_USER=mysql_user
+MYSQL_PASSWORD=mysql_password
+MYSQL_ROOT_PASSWORD=mysql_password
+
+# Docker compose services app
+DB_HOST=mysqldb
+DB_PORT=3306
+```
+
+```
+docker compose -d up
+```

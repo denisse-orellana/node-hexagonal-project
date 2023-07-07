@@ -65,4 +65,11 @@ docker run -d -p 3310:3306 --name node_mysqlserver_container_2 -e MYSQL_ROOT_PAS
 
 
 docker compose up --build -d
+
+docker container logs node_project_db
+
+docker container logs node-project-cont
+
+Check endponts in Postman
+
 ```

@@ -16,13 +16,13 @@ To set up this project make sure you have installed the following technologies:
 
 Clone the repository
 
-```bash
+```console
   git clone git@github.com:denisseee/node-hexagonal-project.git node-hexagonal-project
 ```
 
 Install dependencies
 
-```bash
+```console
   cd node-hexagonal-project
   yarn install
 ```

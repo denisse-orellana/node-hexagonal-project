@@ -16,14 +16,14 @@ services:
     volumes:
       - ./tmp/init:/docker-entrypoint-initdb.d/
       - ./tmp/data:/var/lib/mysql
-    networks:
-      - node-project-network-dc
+    # networks:
+    #   - node-project-network
 
   app:
     depends_on:
       - mysqldb
     container_name: node-project-cont
-    # image: node-project:1.0.0
+    # image: node-project:1.0.1
     build: .
     restart: unless-stopped
     env_file: ./.env
@@ -36,13 +36,13 @@ services:
       - DB_USER=$MYSQL_USER
       - DB_PASSWORD=$MYSQL_PASSWORD
       - DB_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-    networks:
-      - node-project-network-dc
+    # networks:
+    #   - node-project-network
     stdin_open: true
     tty: true
 
 volumes: 
   tmp:
 
-networks:
-  node-project-network-dc:
+# networks:
+#   node-project-network:

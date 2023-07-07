@@ -34,7 +34,7 @@ Install dependencies
 
 ```console
 touch .env
-``````
+```
 
 ```yml
 # .env
@@ -43,17 +43,26 @@ touch .env
 LOCAL_PORT=3000
 DOCKER_PORT=3306
 
-# Docker compose services mysqldb
-MYSQL_DATABASE=mysql_database
-MYSQL_USER=mysql_user
-MYSQL_PASSWORD=mysql_password
-MYSQL_ROOT_PASSWORD=mysql_password
+# Docker compose services mysql
+MYSQL_DATABASE=node_mysqlserver
+MYSQL_USER=user
+MYSQL_PASSWORD=12345
+MYSQL_ROOT_PASSWORD=12345
 
 # Docker compose services app
 DB_HOST=mysqldb
 DB_PORT=3306
 ```
 
+```console
+docker pull mysql:8
 ```
-docker compose -d up
+
+```console
+
+docker run -d -p 3310:3306 --name node_mysqlserver_container_2 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_USER=user -e MYSQL_PASSWORD=12345 -e MYSQL_DATABASE=node_mysqlserver mysql:8
+
+
+
+docker compose up --build -d
 ```

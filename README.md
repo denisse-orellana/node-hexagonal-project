@@ -24,18 +24,19 @@ Install dependencies
 
 ```console
   cd node-hexagonal-project
-
-  ** make sure node_modules y tmp/data is empty
-
   yarn install
 ```
+
+The application will be running in production. To build the project run
 
 ```console
   yarn run build
 ```
 
+Create an ```.env``` file and paste the next variables
+
 ```console
-touch .env
+  touch .env
 ```
 
 ```yml
@@ -56,35 +57,56 @@ DB_HOST=mysqldb
 DB_PORT=3306
 ```
 
-```console
-docker pull mysql:8
-```
+## Running the Dockerfile
+
+Pull the image of MySql DB from DockerHub
 
 ```console
-
-
-docker compose up --build -d
-
-docker container logs node_project_db
-
-docker container logs node-project-cont
-
-Check endponts in Postman
-
+  docker pull mysql:8
 ```
 
-```
-docker build -t node-project:1.0.1 .
+Run the Dockerfile with docker compose
 
+```console
+  docker compose up --build -d
+```
+
+Check out the running containers or from the Docker Desktop
+
+```console
+  docker container logs node_project_db
+  docker container logs node-project-cont
+```
+
+Finally, run the project in the port established in Postman
+
+```console
+  http://localhost:3000
+```
+
+### * Alternative 
+
+You can also create an image of the project 
+
+```console
+  docker build -t node-project:1.0.1 .
+```
+
+Uncomment ```image``` instead of ```build``` in the docker compose file
+
+```yml
 # docker-compose.yml
+
   app:
     depends_on:
       - mysqldb
     container_name: node-project-cont
     image: node-project:1.0.1
     # build: .
+```
 
-docker compose up --build -d
+Then run the docker compose command
 
-
-``````
+```console
+  docker compose up --build -d
+```

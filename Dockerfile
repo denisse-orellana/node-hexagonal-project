@@ -28,4 +28,8 @@ COPY --from=DEPLOYMENT /build/package.json ./package.json
 
 COPY --from=DEPLOYMENT /build/dist ./dist
 
-CMD ["yarn", "run", "prod"]
+COPY --from=DEPLOYMENT /build/tmp ./tmp
+
+EXPOSE 3000
+
+CMD ["yarn", "run", "prod", "mysqld"] 

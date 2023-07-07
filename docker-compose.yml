@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    container_name: node_project_db
+    image: mysql:8
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    ports:
+      - $DOCKER_PORT:$DOCKER_PORT
+    volumes:
+      - ./tmp/init:/docker-entrypoint-initdb.d/
+      - ./tmp/data:/var/lib/mysql
+    networks:
+      - node-project-network-dc
+
+  app:
+    depends_on:
+      - mysqldb
+    container_name: node-project-cont
+    # image: node-project:1.0.0
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $LOCAL_PORT:$LOCAL_PORT
+    environment:
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - DB_NAME=$MYSQL_DATABASE
+      - DB_USER=$MYSQL_USER
+      - DB_PASSWORD=$MYSQL_PASSWORD
+      - DB_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    networks:
+      - node-project-network-dc
+    stdin_open: true
+    tty: true
+
+volumes: 
+  tmp:
+
+networks:
+  node-project-network-dc:

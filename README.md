@@ -20,7 +20,7 @@ Clone the repository in the folder
   git clone git@github.com:denisseee/node-hexagonal-project.git node-hexagonal-project
 ```
 
-Install dependencies
+Install the dependencies
 
 ```console
   cd node-hexagonal-project
@@ -33,7 +33,7 @@ The application will be running in production. To build the project run
   yarn run build
 ```
 
-Create an ```.env``` file and paste the next variables
+Create an ```.env``` file and add the next variables
 
 ```console
   touch .env
@@ -71,7 +71,7 @@ Run the Dockerfile with docker compose
   docker compose up --build -d
 ```
 
-Check out the running containers or from the Docker Desktop
+Check out the running containers from the console or the Docker Desktop
 
 ```console
   docker container logs node_project_db

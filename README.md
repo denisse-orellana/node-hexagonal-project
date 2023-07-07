@@ -24,12 +24,14 @@ Install dependencies
 
 ```console
   cd node-hexagonal-project
+
+  ** make sure node_modules y tmp/data is empty
+
   yarn install
 ```
 
 ```console
   yarn run build
-  yarn run prod
 ```
 
 ```console
@@ -60,9 +62,6 @@ docker pull mysql:8
 
 ```console
 
-docker run -d -p 3310:3306 --name node_mysqlserver_container_2 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_USER=user -e MYSQL_PASSWORD=12345 -e MYSQL_DATABASE=node_mysqlserver mysql:8
-
-
 
 docker compose up --build -d
 
@@ -73,3 +72,19 @@ docker container logs node-project-cont
 Check endponts in Postman
 
 ```
+
+```
+docker build -t node-project:1.0.1 .
+
+# docker-compose.yml
+  app:
+    depends_on:
+      - mysqldb
+    container_name: node-project-cont
+    image: node-project:1.0.1
+    # build: .
+
+docker compose up --build -d
+
+
+``````

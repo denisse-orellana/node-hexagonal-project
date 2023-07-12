@@ -4,7 +4,7 @@ Node JS project with Typescript and APIs Rest.
 
 ## Pre-requisities
 
-To set up this project make sure you have installed the following technologies:
+To run this project make sure you have installed the following technologies:
 
 - Node            v16.14.2
 - Npm             v8.16.0
@@ -78,10 +78,16 @@ Check out the running containers from the console or the Docker Desktop
   docker container logs node-project-cont
 ```
 
-Finally, run the project in the port established in Postman
+Run the project in the port established in Postman
 
 ```console
   http://localhost:3000
+```
+
+Find the list of patients in the following direction
+
+```console
+  http://localhost:3000/patient/list
 ```
 
 ### * Alternative 

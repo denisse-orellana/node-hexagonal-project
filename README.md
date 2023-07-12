@@ -116,3 +116,5 @@ Then run the docker compose command
 ```console
   docker compose up --build -d
 ```
+
+For more details of the routes check README_adittional.md
